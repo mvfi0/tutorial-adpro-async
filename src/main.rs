@@ -81,8 +81,20 @@ fn main() {
         println!("Vegard's Komputer: done!");
     });
 
-    println!("Vegard's Komputer: hey hey!");    
+    spawner.spawn(async {
+        println!("Vegard's Komputer: howdy2!");
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Vegard's Komputer: done2!");
+    });
 
-    drop(spawner);
+    spawner.spawn(async {
+        println!("Vegard's Komputer: howdy3!");
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Vegard's Komputer: done3!");
+    });
+
+    println!("Vegard's Komputer: hey hey!");
+
+    // drop(spawner);
     executor.run();
 }
